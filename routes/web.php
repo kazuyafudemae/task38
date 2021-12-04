@@ -33,6 +33,7 @@ Route::group(['prefix' => 'admin'], function(){
 
 Route::group(['prefix' => 'item'], function(){
 	Route::get('index', 'Admin\Item\IndexController@index')->name('item.index');
+	Route::get('detail', 'Admin\Item\IndexController@detail')->name('item.detail');
 	Route::get('register', 'Admin\Item\\RegisterController@showRegisterForm')->name('item.register');
 	Route::put('register', 'Admin\Item\RegisterController@register')->name('item.register');
 	Route::get('edit', 'Admin\Item\EditController@showEditForm')->name('item.edit');
