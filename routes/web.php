@@ -30,3 +30,16 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('login', 'Admin\Auth\LoginController@login')->name('admin.login');
 	Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 });
+
+Route::group(['prefix' => 'address'], function(){
+	Route::get('home', 'HomeController@index')->name('address.home');
+	Route::get('register', 'Address\RegisterController@showRegisterForm')->name('address.register');
+	Route::put('register', 'Address\RegisterController@register')->name('address.register');
+	Route::get('edit', 'Address\EditController@showEditForm')->name('address.edit');
+	Route::put('edit', 'Address\EditController@edit')->name('address.edit');
+});
+
+Route::group(['prefix' => 'cart'], function(){
+	Route::get('home', 'HomeController@index')->name('carts.home');
+});
+

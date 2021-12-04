@@ -3,8 +3,9 @@
 namespace App\Http\Contrrollers\Address;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class EditController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,8 +18,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function edit($id)
     {
-        return view('home');
+		$address = Address::find($id);
+		return view('Address.edit', $address);
     }
 }

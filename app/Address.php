@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Address extends Authenticatable
 {
     use Notifiable;
+	use SoftDeletes;
+	protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +18,13 @@ class Address extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'postal_code', 'pre_name', 'city_name', 'block_name', 'tel_number',
+		'postal_code',
+		'pre_name',
+		'city_name',
+		'block_name',
+		'tel_number',
     ];
+}
 
     /**
      * The attributes that should be hidden for arrays.
