@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Contrrollers\Address;
+namespace App\Http\Contrrollers\Admin\Item;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class IndexController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,8 +17,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('Address.home');
-    }
+	public function __construct()
+	{
+		$this->middleware('guest:admin')->except('logout');
+	}
+
+
+	public function index() {
+		$items = Item::all();
+		return view('Item.index', ['items' => $items]);
+	}
+
+
+	public function detail(Request $request) {
+		if (isset($request->id)) {
+			$items = Item::find($request);
+			return view('Item.detail', ['items' => $items]);
+		} else {
+			$items = Item::all();
+			return view('item.index', ['items' => $items]);
+		}
+	}
 }

@@ -31,12 +31,12 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
 });
 
-Route::group(['prefix' => 'address'], function(){
-	Route::get('home', 'HomeController@index')->name('address.home');
-	Route::get('register', 'Address\RegisterController@showRegisterForm')->name('address.register');
-	Route::put('register', 'Address\RegisterController@register')->name('address.register');
-	Route::get('edit', 'Address\EditController@showEditForm')->name('address.edit');
-	Route::put('edit', 'Address\EditController@edit')->name('address.edit');
+Route::group(['prefix' => 'item'], function(){
+	Route::get('index', 'Admin\Item\IndexController@index')->name('item.index');
+	Route::get('register', 'Admin\Item\\RegisterController@showRegisterForm')->name('item.register');
+	Route::put('register', 'Admin\Item\RegisterController@register')->name('item.register');
+	Route::get('edit', 'Admin\Item\EditController@showEditForm')->name('item.edit');
+	Route::put('edit', 'Admin\Item\EditController@edit')->name('item.edit');
 });
 
 Route::group(['prefix' => 'cart'], function(){

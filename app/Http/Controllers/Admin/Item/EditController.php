@@ -18,6 +18,15 @@ class EditController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+	public function __construct()
+	{
+		$this->middleware('guest:admin')->except('logout');
+	}
+
+
+
     public function edit($id)
     {
 		$address = Address::find($id);

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Contrrollers\Address;
+namespace App\Http\Contrrollers\Item;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class IndexController extends Controller
 {
     /**
      * Create a new controller instance.

@@ -17,10 +17,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+	public function __construct()
+	{
+		$this->middleware('guest:admin')->except('logout');
+	}
+
+
     public function delete($id)
     {
-		$data = Address::findOrFail($id);
+		$data = Item::findOrFail($id);
 		$data->delete();
-		return redirect('/address/home');
+		return redirect('/Item/home');
     }
 }
