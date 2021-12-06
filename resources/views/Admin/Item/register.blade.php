@@ -11,7 +11,7 @@
 <table>
 <tr><th>商品名</th><th>商品説明</th><th>値段</th><th>在庫数</th></tr>
 <tr>
-<form method="POST" action="{{ route('item.register') }}">
+<form method="POST" action="{{ route('admin.item.register') }}">
 {{ csrf_field() }}
 <td><input type="text" name="name"></td>
 <td><input type="text" name="explanation"></td>

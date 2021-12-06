@@ -32,12 +32,12 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 Route::group(['prefix' => 'admin/item'], function(){
-	Route::get('index', 'Admin\Item\ItemController@index')->name('item.index');
-	Route::get('detail', 'Admin\Item\ItemController@detail')->name('item.detail');
-	Route::get('register', 'Admin\Item\\RegisterController@showRegisterForm')->name('item.register');
-	Route::post('register', 'Admin\Item\RegisterController@register')->name('item.register');
-	Route::get('edit', 'Admin\Item\EditController@showEditForm')->name('item.edit');
-	Route::post('edit', 'Admin\Item\EditController@edit')->name('item.edit');
+	Route::get('index', 'Admin\Item\ItemController@index')->name('admin.item.index');
+	Route::get('detail', 'Admin\Item\ItemController@detail')->name('admin.item.detail');
+	Route::get('register', 'Admin\Item\\RegisterController@showRegisterForm')->name('admin.item.register');
+	Route::post('register', 'Admin\Item\RegisterController@register')->name('admin.item.register');
+	Route::get('edit', 'Admin\Item\EditController@showEditForm')->name('admin.item.edit');
+	Route::post('edit', 'Admin\Item\EditController@edit')->name('admin.item.edit');
 });
 
 Route::group(['prefix' => 'cart'], function(){

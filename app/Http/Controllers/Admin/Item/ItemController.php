@@ -6,7 +6,7 @@ use App\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class ItemController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,17 +27,17 @@ class IndexController extends Controller
 
 	public function index() {
 		$items = Item::all();
-		return view('Item.index', ['items' => $items]);
+		return view('Admin.Item.index', ['items' => $items]);
 	}
 
 
 	public function detail(Request $request) {
 		if (isset($request->id)) {
 			$items = Item::find($request);
-			return view('Item.detail', ['items' => $items]);
+			return view('Admin.Item.detail', ['items' => $items]);
 		} else {
 			$items = Item::all();
-			return view('item.index', ['items' => $items]);
+			return view('Admin.item.index', ['items' => $items]);
 		}
 	}
 }

@@ -33,10 +33,10 @@ class EditController extends Controller
     {
 		if (isset($request->id)) {
 			$items = Item::find($request);
-			return view('Item.edit', ['items' => $items]);
+			return view('Admin.Item.edit', ['items' => $items]);
 		} else {
 			$items = Item::all();
-			return view('Item.index', ['items' => $items]);
+			return view('Admin.Item.index', ['items' => $items]);
 		}
     }
 
@@ -47,10 +47,10 @@ class EditController extends Controller
 			$item->fill($request->except('id'));
 			$item->save();
 			$items = Item::find($request);
-			return view('Item.detail', ['items' => $items]);
+			return view('Admin.Item.detail', ['items' => $items]);
 		} else {
 			$items = Item::all();
-			return view('Item.index', ['items' => $items]);
+			return view('Admin.Item.index', ['items' => $items]);
 		}
 	}
 }

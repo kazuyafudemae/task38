@@ -18,19 +18,29 @@ class RegisterController extends Controller
 
 	public function showRegisterForm()
 	{
-		return view('Item.register');
+		return view('Admin.Item.register');
 	}
 
 	public function register(ItemRequest $request)
 	{
+		$item = new Item;
+		$item->name = $request->name;
+		$item->explanation = $request->explanation;
+		$item->price = $request->price;
+		$item->stock = $request->stock;
+		$item->save();
+
+		/*
 		return Item::create([
 			'name' => $request['name'],
 			'explanation' => $request['explanation'],
 			'price' => $request['price'],
 			'stock' => $request['stock'],
 		]);
+		 */
 
-		return view('Item.index');
+		$items = Item::all();
+		return view('Admin.Item.index', ['items' => $items]);
 	}
 }
 

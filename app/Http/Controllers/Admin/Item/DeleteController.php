@@ -31,10 +31,10 @@ class DeleteController extends Controller
 		if (isset($request->id)) {
 			$data = Item::findOrFail($id);
 			$data->delete();
-			return view('Item.index');
+			return view('Admin.Item.index');
 		} else {
 			$items = Item::all();
-			return view('Item.index', ['items' => $items]);
+			return view('Admin.Item.index', ['items' => $items]);
 		}
     }
 }

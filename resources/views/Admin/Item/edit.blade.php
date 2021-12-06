@@ -12,7 +12,7 @@
 <tr><th>商品名</th><th>商品説明</th><th>値段</th><th>在庫数</th></tr>
 @foreach ($items as $item)
 <tr>
-<form method="POST" action="{{ route('item.edit') }}">
+<form method="POST" action="{{ route('admin.item.edit') }}">
 {{ csrf_field() }}
 <input type="hidden" name="id" value="{{ $item->id }}">
 <td><input type="text" name="name" value="{{ $item->name }}"></td>

@@ -36,7 +36,7 @@ class ItemRequest extends FormRequest
 		return [
 			'name.required' => '商品名が入力されていません',
 			'name.max' => '商品名は190文字以内で入力してください',
-			'explanation.required' => '商品説明が入力されていません'
+			'explanation.required' => '商品説明が入力されていません',
 			'explanation.max' => '商品説明は190文字以内で入力してください',
 			'price.required' => '値段が入力されていません',
 			'price.numeric' => '値段は半角数字で入力してください',
@@ -44,4 +44,5 @@ class ItemRequest extends FormRequest
 			'stock.numeric' => '在庫数は半角数字で入力してください',
 		];
 	}
+
 }
