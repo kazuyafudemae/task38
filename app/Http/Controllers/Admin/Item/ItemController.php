@@ -37,7 +37,7 @@ class ItemController extends Controller
 			return view('Admin.Item.detail', ['items' => $items]);
 		} else {
 			$items = Item::all();
-			return view('Admin.item.index', ['items' => $items]);
+			return view('Admin.Item.index', ['items' => $items]);
 		}
 	}
 }

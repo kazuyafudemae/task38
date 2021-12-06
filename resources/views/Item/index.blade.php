@@ -4,12 +4,11 @@
 
 @section('menubar')
 @parent
-(管理者側)商品一覧ページ
+商品一覧ページ
 @endsection
 
 @section('content')
 <table>
-<a href='{{ route('item.register') }}'>商品の追加</a>
 <tr><th>商品名</th><th>値段</th><th>在庫の有無</th></tr>
 @foreach ($items as $item)
 <tr>

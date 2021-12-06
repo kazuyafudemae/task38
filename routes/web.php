@@ -22,6 +22,12 @@ Route::get('/', function () {
 		    return view('welcome');
 });
 
+
+Route::group(['prefix' => 'item'], function(){
+	Route::get('index', 'ItemController@index')->name('item.index');
+	Route::get('detail', 'ItemController@detail')->name('item.detail');
+});
+
 Route::group(['prefix' => 'admin'], function(){
 	//home
 	Route::get('home', 'Admin\HomeController@index')->name('admin.home');

@@ -43,10 +43,10 @@ class EditController extends Controller
 	public function edit(ItemRequest $request)
 	{
 		if (isset($request->id)) {
-			$item = Item::findOrNew($request->id);
+			$item = Item::find($request->id);
 			$item->fill($request->except('id'));
 			$item->save();
-			$items = Item::find($request);
+			$items = [$item];
 			return view('Admin.Item.detail', ['items' => $items]);
 		} else {
 			$items = Item::all();

@@ -9,7 +9,7 @@ Item詳細ページ
 
 @section('content')
 <table>
-<tr><th>商品名</th><th>商品説明</th><th>値段</th><th>在庫の有無</th><th></th></tr>
+<tr><th>商品名</th><th>商品説明</th><th>値段</th><th>在庫の有無</th></tr>
 @foreach ($items as $item)
 <tr>
 <td>{{$item->name}}</td>
@@ -20,7 +20,6 @@ Item詳細ページ
 @else
 <td>在庫なし</td>
 @endif
-<td><a href='{{route('item.edit', ['id' => $item->id])}}'>編集 </a></td>
 </tr>
 @endforeach
 </table>
