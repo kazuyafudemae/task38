@@ -24,8 +24,8 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'item'], function(){
-	Route::get('index', 'ItemController@index')->name('item.index');
-	Route::get('detail', 'ItemController@detail')->name('item.detail');
+	Route::get('index', 'Item\ItemController@index')->name('item.index');
+	Route::get('detail', 'Item\ItemController@detail')->name('item.detail');
 });
 
 Route::group(['prefix' => 'admin'], function(){
