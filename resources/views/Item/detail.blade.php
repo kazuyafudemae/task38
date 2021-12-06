@@ -1,4 +1,4 @@
-@extends('layouts.item')
+@extends('layouts.userItem')
 
 @section('title', 'Items')
 
