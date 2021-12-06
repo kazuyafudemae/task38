@@ -17,7 +17,7 @@
 <input type="hidden" name="id" value="{{ $item->id }}">
 <td><input type="text" name="name" value="{{ $item->name }}"></td>
 <td><input type="text" name="explanation" value="{{ $item->explanation }}"></td>
-<td><input type="text" name="price" value="{{ $item->price }}"></td>
+<td><p>{{ $item->price }}</p></td>
 <td><input type="text" name="stock" value="{{ $item->stock }}"></td>
 </tr>
 @endforeach

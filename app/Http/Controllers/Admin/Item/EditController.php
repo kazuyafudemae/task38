@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Item;
 use App\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ItemRequest;
+use App\Http\Requests\ItemEditRequest;
 
 class EditController extends Controller
 {
@@ -40,7 +40,7 @@ class EditController extends Controller
 		}
     }
 
-	public function edit(ItemRequest $request)
+	public function edit(ItemEditRequest $request)
 	{
 		if (isset($request->id)) {
 			$item = Item::find($request->id);
