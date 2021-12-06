@@ -12,7 +12,7 @@ class RegisterController extends Controller
 
 	public function __construct()
 	{
-		$this->middleware('guest:admin')->except('logout');
+		$this->middleware('auth:admin')->except('logout');
 	}
 
 
@@ -24,11 +24,10 @@ class RegisterController extends Controller
 	public function register(ItemRequest $request)
 	{
 		return Item::create([
-			'postal_code' => $request['postal_code'],
-			'pre_name' => $request['pre_name'],
-			'city_name' => $request['city_name'],
-			'block_name' => $request['block_name'],
-			'tel_number' => $request['tel_number'],
+			'name' => $request['name'],
+			'explanation' => $request['explanation'],
+			'price' => $request['price'],
+			'stock' => $request['stock'],
 		]);
 
 		return view('Item.index');

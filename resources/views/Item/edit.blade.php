@@ -14,12 +14,12 @@
 <tr>
 <form method="POST" action="{{ route('item.edit') }}">
 <td><input type="text" name="name" value="{{ $item->name }}"></td>
-<td><input type="text" name="explanation" value="{{ $item->explanation }"></td>
+<td><input type="text" name="explanation" value="{{ $item->explanation }}"></td>
 <td><input type="text" name="price" value="{{ $item->price }}"></td>
 <td><input type="text" name="stock" value="{{ $item->stock }}"></td>
 </tr>
 @endforeach
+</table>
 <input type='submit' value='編集'>
 </form>
-</table>
 @endsection
