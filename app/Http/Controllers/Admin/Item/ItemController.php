@@ -32,7 +32,7 @@ class ItemController extends Controller
 
 
 	public function detail(Request $request) {
-		if (isset($request->id)) {
+		if (Item::find($request->id) !== null) {
 			$items = Item::find($request);
 			return view('Admin.Item.detail', ['items' => $items]);
 		} else {

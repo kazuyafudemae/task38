@@ -31,7 +31,7 @@ class EditController extends Controller
 
     public function showEditForm(Request $request)
     {
-		if (isset($request->id)) {
+		if (Item::find($request->id) !== null) {
 			$items = Item::find($request);
 			return view('Admin.Item.edit', ['items' => $items]);
 		} else {
@@ -42,9 +42,9 @@ class EditController extends Controller
 
 	public function edit(ItemEditRequest $request)
 	{
-		if (isset($request->id)) {
+		if (Item::find($request->id) !== null) {
 			$item = Item::find($request->id);
-			$item->fill($request->except('id'));
+			$item->fill($request->except('id', 'price'));
 			$item->save();
 			$items = [$item];
 			return view('Admin.Item.detail', ['items' => $items]);
