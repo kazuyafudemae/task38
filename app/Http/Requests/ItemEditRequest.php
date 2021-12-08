@@ -26,7 +26,6 @@ class ItemEditRequest extends FormRequest
 		return [
 			'name' => ['required', 'max:190'],
 			'explanation' => ['required', 'max:190'],
-			//'price' => ['required', 'numeric', 'max:1000000', 'min:0'],
 			'stock' => ['required', 'numeric', 'max:1000000', 'min:0'],
 		];
 	}
@@ -38,13 +37,9 @@ class ItemEditRequest extends FormRequest
 			'name.max' => '商品名は190文字以内で入力してください',
 			'explanation.required' => '商品説明が入力されていません',
 			'explanation.max' => '商品説明は190文字以内で入力してください',
-			'price.required' => '値段が入力されていません',
-			'price.numeric' => '値段は半角数字で入力してください',
-			'price.max' => '値段は1000000桁以内で入力してください',
-			'price.min' => '値段は0以上で入力してください',
 			'stock.required' => '在庫数が入力されていません',
 			'stock.numeric' => '在庫数は半角数字で入力してください',
-			'stock.max' => '在庫数は1000000桁以内で入力してください',
+			'stock.max' => '在庫数は1000000以内で入力してください',
 			'stock.min' => '在庫数は0以上で入力してください',
 		];
 	}
