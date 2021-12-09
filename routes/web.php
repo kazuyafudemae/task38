@@ -21,6 +21,9 @@ Route::get('/', function () {
 		    return view('welcome');
 });
 
+Route::group(['prefix' => 'cart'], function() {
+	Route::get('index', 'Cart\CartController@index')->name('cart.index');
+}
 
 Route::group(['prefix' => 'item'], function(){
 	Route::get('index', 'Item\ItemController@index')->name('item.index');
