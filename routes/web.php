@@ -15,15 +15,16 @@
 Auth::routes();
 
 
+Route::get('/', 'Item\ItemController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
-		    return view('welcome');
-});
 
 Route::group(['prefix' => 'cart'], function() {
 	Route::get('index', 'Cart\CartController@index')->name('cart.index');
-}
+	Route::post('index', 'Cart\CartController@add')->name('cart.add');
+	Route::post('index', 'Cart\CartController@delete')->name('cart.delete');
+});
+
 
 Route::group(['prefix' => 'item'], function(){
 	Route::get('index', 'Item\ItemController@index')->name('item.index');
@@ -52,3 +53,6 @@ Route::group(['prefix' => 'cart'], function(){
 	Route::get('home', 'HomeController@index')->name('carts.home');
 });
 
+Route::get('/', function () {
+		    return view('welcome');
+});

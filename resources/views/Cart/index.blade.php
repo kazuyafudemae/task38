@@ -10,7 +10,7 @@
 
 @section('content')
 <body>
-@if (0 < $carts->count())
+@if ($carts->count() > 0)
 <table>
 <h1>カート内容</h1>
 <tr style="background-color:#e3f0fb">
@@ -24,15 +24,14 @@
 <td align="right">{{ $cart->item->name }}</td>
 <td align="right">{{ $cart->quantity }}</td>
 <td align="right">{{ $cart->subtotal() }}</td>
-<td><form method="post" action="{{ route('cart.delete') }}">
+<td><form method="post" action="{{ route('cart.index') }}">
 {{ csrf_field() }}
 <input type="hidden" name="cart_id" value="{{ $cart->id }}">
-<button type="submit">削除</button>
+<button type="submit">カートに追加</button>
 </form></td></tr>
 @endforeach
 <td style="background-color:#f5f5f5">
 <td>合計</td>
-<td>{{ $subtotals }}</td>
 <td>税込: {{ $totals }}</td>
 <td></td>
 </td>

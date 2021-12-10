@@ -1,10 +1,10 @@
-@extends('layouts.userItem')
+@extends('layouts.cart')
 
 @section('title', 'Items')
 
 @section('menubar')
 @parent
-Item詳細ページ
+(管理者側)Item詳細ページ
 @endsection
 
 @section('content')
@@ -20,12 +20,7 @@ Item詳細ページ
 @else
 <td>在庫なし</td>
 @endif
-<td><form method="post" action="{{ route('cart.delete') }}">
-{{ csrf_field() }}
-<input type="hidden" name="cart_id" value="{{ $item->id }}">
-<button type="submit">削除</button>
-</form>
-</td>
+<td><a href='{{route('cart.index', ['id' => $item->id])}}'>編集 </a></td>
 </tr>
 @endforeach
 </table>

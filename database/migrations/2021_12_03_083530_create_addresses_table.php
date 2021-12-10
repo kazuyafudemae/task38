@@ -13,6 +13,10 @@ class CreateAddressesTable extends Migration
 	 */
 	public function up()
 	{
+		if (Schema::hasTable('addresses')) {
+			// テーブルが存在していればリターン
+			return;
+		}
 		Schema::create('addresses', function (Blueprint $table) {
 			$table->increments('id');
 			$table->increments('postal_code');
