@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Cart;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
 use App\Cart;
@@ -12,7 +11,7 @@ class CartController extends Controller
 		$this->cart = $cart;
 	}
 	public function index() {
-		$carts = $this->where('user_id', $auth_id)->get();;
+		$carts = $this->where('user_id', Auth::id())->get();;
 		$subtotals = $this->subtotals($carts);
 		$totals = $this->totals($carts);
 		return view('cart.index', compact('carts', 'totals', 'subtotals'));

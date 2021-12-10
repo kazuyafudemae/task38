@@ -14,8 +14,10 @@
 
 Auth::routes();
 
+Route::get('/', function () {
+		    return view('welcome');
+});
 
-Route::get('/', 'Item\ItemController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -53,6 +55,3 @@ Route::group(['prefix' => 'cart'], function(){
 	Route::get('home', 'HomeController@index')->name('carts.home');
 });
 
-Route::get('/', function () {
-		    return view('welcome');
-});

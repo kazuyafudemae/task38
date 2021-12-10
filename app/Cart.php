@@ -1,5 +1,4 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,56 +7,49 @@ use Illuminate\Support\facades\Auth;
 
 class Cart extends Model
 {
-	use SoftDeletes;
-
-	protected $dates = ['deleted_at'];
-
-	protected $fillable = [
-		'uesr_id',
-		'item_id',
-		'quantity',
-	];
-
+	use SoftDeletes; //ソフトデリート準備
+	protected $fillable = ['user_id', 'item_id', 'quantity'];
 	protected $table = 'carts';
 
-	//item() に_id をつけた外部キーが自動設定される
 	public function item() {
-		return $this->belongsTo('App\Item');
+		//リレーション
+		return $this->belongsTo('App\Item', 'item_id');
 	}
 
-	public function add_cart($item_id, $add_qty) {
+	public function insert($item_id, $add_qty) {
 		$item = (new item)->findOrFail($item_id);
 		$qty = $item->quantity;
-		if ($qty === 0) {
+		//在庫なしバリデーション
+		if ($qty <= 0) {
 			return false;
 		}
-
-		$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' =>$item_id]);
+		$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' => $item_id], ['quantity' => 0]);
 		DB::beginTransaction();
 		try {
-			$cart->increment('quantity', 'add_qty');
-			$item->decrement('stock', 'add_qty');
-			DB::commit;
+			$cart->increment('quantity', $add_qty);
+			$item->decrement('quantity', $add_qty);
+			DB::commit();
 			return true;
-		} catch (Exception) {
+		} catch (Exception $e) {
 			DB::rollback();
 			return false;
 		}
 	}
 
-	public function delete($cart_id) {
+	public function delete_cart($cart_id) {
 		$cart = $this->findOrCreate($cart_id);
 		if ($cart->user_id == Auth::id()) {
 			DB::beginTransaction();
 			try {
 				$item_id = $cart->item_id;
-				$qty = $cart->quautity;
+				$qty = $cart->quantity;
 				$cart->delete();
+				$item = (new Item)->find($item_id);
 				$item->increment('quantity', $qty);
 				DB::commit();
 				return true;
 			} catch (Exception $e) {
-				DB::rollback;
+				DB::rollback();
 			}
 		}
 		return false;
@@ -68,3 +60,5 @@ class Cart extends Model
 		return $result;
 	}
 }
+
+
