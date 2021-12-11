@@ -17,8 +17,8 @@ class Cart extends Model
 	}
 
 	public function insert($item_id, $add_qty) {
-		$item = (new item)->findOrFail($item_id);
-		$qty = $item->quantity;
+		$cart = Cart::find($item_id);
+		$qty = $cart->item->quantity;
 		//在庫なしバリデーション
 		if ($qty <= 0) {
 			return false;

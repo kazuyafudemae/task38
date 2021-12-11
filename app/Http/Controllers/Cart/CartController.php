@@ -3,23 +3,25 @@ namespace App\Http\Controllers\Cart;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Cart;
 
 class CartController extends Controller
 {
-	public function __construct(Cart $cart) {
-		$this->cart = $cart;
+	public function __construct() {
+		$cart = new Cart;
 	}
 	public function index() {
-		$carts = $this->where('user_id', Auth::id())->get();;
+		$carts = $cart->find('user_id', Auth::id());
 		$subtotals = $this->subtotals($carts);
 		$totals = $this->totals($carts);
 		return view('cart.index', compact('carts', 'totals', 'subtotals'));
 	}
+
 	private function subtotals($carts) {
 		$result = 0;
 		foreach ($carts as $cart) {
-			$result += $cart->subtotal();
+			$result = $cart->quantity * $cart->item->price;
 		}
 		return $result;
 	}
