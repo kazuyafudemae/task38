@@ -23,7 +23,7 @@
 <tr style="background-color:#f5f5f5">
 <td align="right">{{ $cart->item->name }}</td>
 <td align="right">{{ $cart->quantity }}</td>
-<td align="right">{{ $cart->subtotal() }}</td>
+<td align="right">{{ $cart->subtotal }}</td>
 <td><form method="post" action="{{ route('cart.index') }}">
 {{ csrf_field() }}
 <input type="hidden" name="cart_id" value="{{ $cart->id }}">

@@ -22,6 +22,7 @@ class CreateCartsTable extends Migration
             $table->integer('user_id');
             $table->integer('item_id');
             $table->integer('quantity');
+            $table->integer('sub_total');
             $table->timestamps();
 			$table->softDeletes();
         });

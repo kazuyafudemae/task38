@@ -8,13 +8,14 @@ use App\Cart;
 
 class CartController extends Controller
 {
-	public function __construct() {
-		$cart = new Cart;
+	public function __construct(Cart $cart) {
+		$this->cart = $cart;
 	}
 	public function index() {
-		$carts = $cart->find('user_id', Auth::id());
+		$carts = $this->cart->where('user_id', Auth::id())->get();
 		$subtotals = $this->subtotals($carts);
 		$totals = $this->totals($carts);
+		dd($carts);
 		return view('cart.index', compact('carts', 'totals', 'subtotals'));
 	}
 

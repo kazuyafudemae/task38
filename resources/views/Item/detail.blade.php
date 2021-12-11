@@ -15,17 +15,18 @@ Item詳細ページ
 <td>{{$item->name}}</td>
 <td>{{$item->explanation}}</td>
 <td>{{$item->price}}円</td>
-@if ($item->stock >= 1)
-<td>在庫あり</td>
+@if ($item->stock >= 1 && !isset($auth))
+<td><form method="post" action="{{ route('cart.add') }}">
+{{ csrf_field() }}
+<input type="hidden" name="item_id" value="{{ $item->id }}">
+<button type="submit">カートに追加</button>
+</form>
+</td>
+@elseif ($item->stock >= 1)
+<a href='{{route('login')}}'>ログインしてください</a>
 @else
 <td>在庫なし</td>
 @endif
-<td><form method="post" action="{{ route('cart.delete') }}">
-{{ csrf_field() }}
-<input type="hidden" name="cart_id" value="{{ $item->id }}">
-<button type="submit">削除</button>
-</form>
-</td>
 </tr>
 @endforeach
 </table>

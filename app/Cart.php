@@ -28,6 +28,7 @@ class Cart extends Model
 		try {
 			$cart->increment('quantity', $add_qty);
 			$item->decrement('quantity', $add_qty);
+			$cart->sub_total = $cart->quantity * $cart->item->price;
 			DB::commit();
 			return true;
 		} catch (Exception $e) {
