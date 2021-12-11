@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'cart'], function() {
 	Route::get('index', 'Cart\CartController@index')->name('cart.index');
 	Route::post('index', 'Cart\CartController@add')->name('cart.add');
-	Route::post('index', 'Cart\CartController@delete')->name('cart.delete');
+	Route::post('', 'Cart\CartController@delete')->name('cart.delete');
 });
 
 

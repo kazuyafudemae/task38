@@ -24,10 +24,10 @@
 <td align="right">{{ $cart->item->name }}</td>
 <td align="right">{{ $cart->quantity }}</td>
 <td align="right">{{ $cart->subtotal }}</td>
-<td><form method="post" action="{{ route('cart.index') }}">
+<td><form method="post" action="{{ route('cart.delete') }}">
 {{ csrf_field() }}
 <input type="hidden" name="cart_id" value="{{ $cart->id }}">
-<button type="submit">カートに追加</button>
+<button type="submit">カートから削除</button>
 </form></td></tr>
 @endforeach
 <td style="background-color:#f5f5f5">
