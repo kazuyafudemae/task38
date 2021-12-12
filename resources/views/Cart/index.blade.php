@@ -17,18 +17,21 @@
 <th>商品名</th>
 <th>購入数</th>
 <th>価格</th>
-<th>削除</th>
+<th>合計</th>
+<th></th>
 </tr>
 @foreach ($carts as $cart)
 <tr>
 <td align="right">{{ $cart->item->name }}</td>
 <td align="right">{{ $cart->quantity }}</td>
+<td align="right">{{ $cart->item->price }}</td>
 <td align="right">{{ $cart->sub_total }}</td>
 <td><form method="post" action="{{ route('cart.delete') }}">
 {{ csrf_field() }}
 <input type="hidden" name="cart_id" value="{{ $cart->id }}">
 <button type="submit">カートから削除</button>
-</form></td></tr>
+</form></td>
+</tr>
 @endforeach
 </table>
 @else

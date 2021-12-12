@@ -3,7 +3,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\facades\Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Item;
 
 class Cart extends Model
 {
@@ -22,44 +24,44 @@ class Cart extends Model
 	}
 
 	public function insert($item_id, $add_qty) {
-		$item = (new Item)->findOrFail($item_id);
-		$qty = $item->quantity;
+		$item = Item::findOrFail($item_id);
+		$qty = $item->stock;
 		//在庫なしバリデーション
 		if ($qty <= 0) {
 			return false;
 		}
 		$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' => $item_id], ['quantity' => 0]);
-		dd($cart);
 		DB::beginTransaction();
 		try {
 			$cart->increment('quantity', $add_qty);
-			$item->decrement('quantity', $add_qty);
-			$cart->sub_total = $cart->quantity * $cart->item->price;
+			$item->decrement('stock', $add_qty);
 			DB::commit();
-			return true;
 		} catch (Exception $e) {
 			DB::rollback();
 			return false;
 		}
+		$cart->sub_total = $cart->quantity * $cart->item->price;
+		$cart->save();
+		return true;
 	}
 
 	public function delete_cart($cart_id) {
 		$cart = $this->findOrCreate($cart_id);
-		if ($cart->user_id == Auth::id()) {
+		if ($cart->user_id === Auth::id()) {
 			DB::beginTransaction();
 			try {
 				$item_id = $cart->item_id;
 				$qty = $cart->quantity;
 				$cart->delete();
-				$item = (new Item)->find($item_id);
+				$item = Item::find($item_id);
 				$item->increment('quantity', $qty);
 				DB::commit();
 				return true;
 			} catch (Exception $e) {
 				DB::rollback();
+				return false;
 			}
 		}
-		return false;
 	}
 }
 

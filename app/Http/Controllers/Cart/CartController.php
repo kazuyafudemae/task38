@@ -21,17 +21,20 @@ class CartController extends Controller
 
 	public function add(Request $request) {
 		$item_id = $request->input('item_id');
-		dump($this->cart->insert($item_id, 1));
 		if ($this->cart->insert($item_id, 1)) {
 			$carts = Cart::All();
-			return view('Cart.index', compact('carts'));
+			return view('Cart.index', compact('carts'))->with('true_message', 'カートに商品を追加しました');
 		} else {
-			return view('Cart.index', compact('carts', 'totals', 'subtotals'));
+			$carts = Cart::All();
+			return view('Cart.index',  compact('carts'))->with('false_message', '在庫数以上の商品が追加されました');
 		}
 	}
 
 	public function delete(Request $request) {
 		$cart_id = $request->input('cart_id');
+		$this->cart->delete($cart_id);
+		dump($cart_id);
+		dd($this->cart->delete($cart_id));
 		return redirect(route('cart.index'))->with('true_message', 'カートから商品を削除しました。');
 	}
 
