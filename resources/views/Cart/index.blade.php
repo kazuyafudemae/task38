@@ -32,6 +32,13 @@
 </form></td>
 </tr>
 @endforeach
+<td style="background-color:#f5f5f5">
+@if (isset($totals))
+<td>合計: {{ $subtotals }}</td>
+<td>税込: {{ $totals }}</td>
+@endif
+<td></td>
+</td>
 </table>
 @else
 <p>カートに商品はありません</p>

@@ -12,6 +12,25 @@ class CartController extends Controller
 		$this->cart = $cart;
 	}
 
+	private function totals($carts) {
+		$result = $this->subtotals($carts) + $this->tax($carts);
+		return $result;
+	}
+
+	private function tax($carts) {
+		$result = floor($this->subtotals($carts) * 0.1);
+		return $result;
+	}
+
+	private function subtotals($carts) {
+		$result = 0;
+		foreach ($carts as $cart) {
+			$result = $cart->quantity * $cart->item->price;
+		}
+		return $result;
+	}
+
+
 	public function index() {
 		$carts = Cart::where('user_id', Auth::id())->get();
 		$subtotals = $this->subtotals($carts);
@@ -33,26 +52,10 @@ class CartController extends Controller
 	public function delete(Request $request) {
 		$cart_id = $request->input('cart_id');
 		$this->cart->delete_cart($cart_id);
-		dump($cart_id);
-		dump($this->cart->delete_cart($cart_id));
-		return redirect(route('cart.index'))->with('true_message', 'カートから商品を削除しました。');
-	}
-
-	private function subtotals($carts) {
-		$result = 0;
-		foreach ($carts as $cart) {
-			$result = $cart->quantity * $cart->item->price;
+		if ($this->cart->delete_cart($cart_id)) {
+			return redirect(route('cart.index'))->with('true_message', 'カートから商品を削除しました。');
+		} else {
+			return redirect(route('cart.index'))->with('false__message', 'カートから商品を削除しました。');
 		}
-		return $result;
-	}
-
-	private function totals($carts) {
-		$result = $this->subtotals($carts) + $this->tax($carts);
-		return $result;
-	}
-
-	private function tax($carts) {
-		$result = floor($this->subtotals($carts) * 0.1);
-		return $result;
 	}
 }

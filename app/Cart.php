@@ -47,8 +47,9 @@ class Cart extends Model
 
 	public function delete_cart($cart_id) {
 		$cart = Cart::find($cart_id);
-		dump($cart);
-		if ($cart->user_id === Auth::id()) {
+		$item_id = optional($cart)->item_id;
+		$item = Item::find($item_id);
+		if (optional($cart)->user_id === Auth::id()) {
 			DB::beginTransaction();
 			try {
 				$item_id = $cart->item_id;
