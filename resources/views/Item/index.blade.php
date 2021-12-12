@@ -3,7 +3,6 @@
 @section('title', 'Items')
 
 @section('menubar')
-<a href='{{route('home')}}'>ホーム画面へ</a>
 @parent
 商品一覧ページ
 @endsection

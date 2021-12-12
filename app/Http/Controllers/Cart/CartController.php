@@ -32,9 +32,9 @@ class CartController extends Controller
 
 	public function delete(Request $request) {
 		$cart_id = $request->input('cart_id');
-		$this->cart->delete($cart_id);
+		$this->cart->delete_cart($cart_id);
 		dump($cart_id);
-		dd($this->cart->delete($cart_id));
+		dump($this->cart->delete_cart($cart_id));
 		return redirect(route('cart.index'))->with('true_message', 'カートから商品を削除しました。');
 	}
 

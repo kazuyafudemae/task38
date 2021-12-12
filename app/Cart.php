@@ -46,7 +46,8 @@ class Cart extends Model
 	}
 
 	public function delete_cart($cart_id) {
-		$cart = $this->findOrCreate($cart_id);
+		$cart = Cart::find($cart_id);
+		dump($cart);
 		if ($cart->user_id === Auth::id()) {
 			DB::beginTransaction();
 			try {
@@ -54,14 +55,14 @@ class Cart extends Model
 				$qty = $cart->quantity;
 				$cart->delete();
 				$item = Item::find($item_id);
-				$item->increment('quantity', $qty);
+				$item->increment('stock', $qty);
 				DB::commit();
 				return true;
 			} catch (Exception $e) {
 				DB::rollback();
-				return false;
 			}
 		}
+		return false;
 	}
 }
 

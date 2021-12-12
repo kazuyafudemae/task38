@@ -3,7 +3,6 @@
 @section('title', 'Items')
 
 @section('menubar')
-<p class='menutitle'><a href='{{route('home')}}'>ホーム画面</a></p>
 @parent
 カート内一覧ページ
 @endsection
@@ -35,7 +34,7 @@
 @endforeach
 </table>
 @else
-<h1>カートに商品はありません</h1>
+<p>カートに商品はありません</p>
 @endif
 </body>
 @endsection
