@@ -16,8 +16,8 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 @section('menubar')
 <ul>
 <p class='menutitle'><a href='{{route('home')}}'>User Home</a></p>
-<p class='menutitle'><a href='{{route('item.index')}}'>Toppage</a></p>
-<p class='menutitle'><a href='{{route('cart.index')}}'>カート一覧画面へ</a></p>
+<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>
+<p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p>
 <li>@show</li>
 </ul>
 <hr size='1'>

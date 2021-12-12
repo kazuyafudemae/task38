@@ -33,7 +33,7 @@
 </tr>
 @endforeach
 <td style="background-color:#f5f5f5">
-@if (isset($totals))
+@if (isset($subtotals) && isset($totals))
 <td>合計: {{ $subtotals }}</td>
 <td>税込: {{ $totals }}</td>
 @endif
@@ -41,7 +41,12 @@
 </td>
 </table>
 @else
-<p>カートに商品はありません</p>
+<p>カートが空です</p>
+@endif
+@if (isset($true_message))
+<p>{{ $true_message }} </p>
+@elseif (isset($false_message))
+<p>{{ $false_message }} </p>
 @endif
 </body>
 @endsection
