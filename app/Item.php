@@ -20,7 +20,4 @@ class Item extends Model
 
 	protected $table = 'items';
 
-	public function cart() {
-		return $this->hasMany('App\Cart');
-	}
 }

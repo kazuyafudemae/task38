@@ -16,14 +16,20 @@ class Cart extends Model
 		return $this->belongsTo('App\Item', 'item_id');
 	}
 
+	public function subtotal() {
+		$result = $this->item->price * $this->quantity;
+		return $result;
+	}
+
 	public function insert($item_id, $add_qty) {
-		$cart = Cart::find($item_id);
-		$qty = $cart->item->quantity;
+		$item = (new Item)->findOrFail($item_id);
+		$qty = $item->quantity;
 		//在庫なしバリデーション
 		if ($qty <= 0) {
 			return false;
 		}
 		$cart = $this->firstOrCreate(['user_id' => Auth::id(), 'item_id' => $item_id], ['quantity' => 0]);
+		dd($cart);
 		DB::beginTransaction();
 		try {
 			$cart->increment('quantity', $add_qty);
@@ -54,11 +60,6 @@ class Cart extends Model
 			}
 		}
 		return false;
-	}
-
-	public function subtotal() {
-		$result = $this->item->price * $this->quantity;
-		return $result;
 	}
 }
 
