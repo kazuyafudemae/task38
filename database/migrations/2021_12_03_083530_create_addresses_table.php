@@ -19,11 +19,13 @@ class CreateAddressesTable extends Migration
 		}
 		Schema::create('addresses', function (Blueprint $table) {
 			$table->increments('id');
-			$table->integer('postal_code');
-			$table->string('pre_name');
-			$table->string('city_name');
-			$table->string('block_name');
-			$table->integer('tel_number');
+			$table->integer('user_id');
+			$table->integer('first_code');
+			$table->integer('last_code');
+			$table->string('state');
+			$table->string('city');
+			$table->string('street');
+			$table->integer('tel');
 			$table->softDeletes();
 			$table->timestamps();
 		});
