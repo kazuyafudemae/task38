@@ -51,7 +51,7 @@ class CartController extends Controller
 				$carts = Cart::where('user_id', Auth::id())->get();
 				$subtotals = $this->subtotals($carts);
 				$totals = $this->totals($carts);
-				return view('Cart.index', compact('carts', 'totals', 'subtotals'))->with('false_message', 'カートに商品を追加しました');
+				return view('Cart.index', compact('carts', 'totals', 'subtotals'))->with('false_message', '在庫数を超えた商品が追加されました');
 			}
 		} else {
 			return redirect(route('home'));
@@ -64,7 +64,7 @@ class CartController extends Controller
 			if ($this->cart->delete_cart($cart_id)) {
 				return redirect(route('cart.index'));
 			} else {
-				return redirect(route('item.index'));
+				return redirect(route('cart.index'));
 			}
 		} else {
 			return redirect(route('home'));

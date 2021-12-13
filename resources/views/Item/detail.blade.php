@@ -25,7 +25,7 @@ Item詳細ページ
 </td>
 @elseif ($item->stock >= 1)
 <td>
-<a href='{{route('login')}}'>ログインしてください</a>
+<a href='{{ route('login') }}'>ログインしてください</a>
 </td>
 @else
 <td>在庫なし</td>

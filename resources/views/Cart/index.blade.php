@@ -32,13 +32,15 @@
 </form></td>
 </tr>
 @endforeach
-<td style="background-color:#f5f5f5">
 @if (isset($subtotals) && isset($totals))
+<tr style="background-color:#f5f5f5">
+<td></td>
+<td></td>
 <td>合計: {{ $subtotals }}</td>
 <td>税込: {{ $totals }}</td>
-@endif
 <td></td>
-</td>
+</tr>
+@endif
 </table>
 @else
 <p>カートが空です</p>
