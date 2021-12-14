@@ -20,6 +20,14 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'address'], function() {
+	Route::get('index', 'Address\AddressController@index')->name('address.index');
+	Route::get('add', 'Address\AddressController@showAddForm')->name('address.add');
+	Route::get('edit', 'Address\AddressController@showEditForm')->name('address.edit');
+	Route::post('add', 'Address\AddressController@add')->name('address.add');
+	Route::post('edit', 'Address\AddressController@edit')->name('address.edit');
+	Route::post('delete', 'Address\AddressController@delete')->name('address.delete');
+}
 
 Route::group(['prefix' => 'cart'], function() {
 	Route::get('index', 'Cart\CartController@index')->name('cart.index');
