@@ -27,7 +27,7 @@ Route::group(['prefix' => 'address'], function() {
 	Route::post('add', 'Address\AddressController@add')->name('address.add');
 	Route::post('edit', 'Address\AddressController@edit')->name('address.edit');
 	Route::post('delete', 'Address\AddressController@delete')->name('address.delete');
-}
+});
 
 Route::group(['prefix' => 'cart'], function() {
 	Route::get('index', 'Cart\CartController@index')->name('cart.index');
