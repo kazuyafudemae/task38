@@ -1,37 +1,15 @@
 <?php
 
-namespace App;
+namespace App\UseCases;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Address;
 use App\Repositories\AddressRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Address;
-use App\User;
 
-class Address extends Model
+class AddressUsecase
 {
-    use Notifiable;
-	use SoftDeletes;
-	protected $dates = ['deleted_at'];
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'postal_code',
-		'pre_name',
-		'city_name',
-		'block_name',
-		'tel_number',
-    ];
-
-
 
 	public function __construct(
 		Address $address,
@@ -138,10 +116,6 @@ class Address extends Model
 			set_message('お届け先住所が変更されました。');
 		}
 	}
+
 }
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
