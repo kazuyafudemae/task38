@@ -24,26 +24,35 @@ class AddressRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'postal_code' => ['required', 'numeric', 'digits:7'],
-			'pre_name' => 'required',
-			'city_name' => 'required',
-			'block_name' => ['required', 'unique:addresses'],
-			'tel_number' => ['required', 'numeric', 'digits_between:10,11'],
+			'name' => ['required', 'max:50'],
+			'first_code' => ['required', 'regex:/[0-9]{3}/']
+			'last_code' => ['required', 'regex:/[0-9]{4}/']
+			'state' => ['required', 'max:10'],
+			'city' => ['required', 'max:50'],
+			'street' => ['required', 'unique:addresses,street', 'max:100'],
+			'tel' => ['required', 'regex:/^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$/']
 		];
 	}
 
 	public function messages()
 	{
 		return [
-			'pastal_code.required' => '郵便番号が入力されていません',
-			'pastal_code.disits:7' => '郵便番号は７桁で入力してください',
-			'pre_name.required' => '住所の都道府県がが入力されていません',
-			'city_name.required' => '住所の市区町村が入力されていません',
-			'block_name.required' => '住所の町名番地が入力されていません',
-			'block_name.unique:addresses' => 'その住所はすでに登録されています',
-			'tel_number.required' => '電話番号が入力されていません',
-			'tel_number.numeric' => '電話番号は半角数字で入力してください',
-			'tel_number.digits_between:10,11' => '電話番号は10〜11桁の数字で入力してください',
+			'name.required' => '氏名が入力されていません',
+			'name.max' => '氏名は50文字以内で入力してください',
+			'first_code.required' => '郵便番号が入力されていません',
+			'first_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
+			'last_code.required' => '郵便番号が入力されていません',
+			'last_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
+			'state.required' => '住所の都道府県がが入力されていません',
+			'state.max' => '都道府県は10文字以内で入力してください',
+			'city.required' => '住所の市区町村が入力されていません',
+			'city.max' => '市町村名は50文字以内で入力してください',
+			'street.required' => '住所の町名番地が入力されていません',
+			'street.unique' => 'その住所はすでに登録されています',
+			'street.max' => '町名番地は100文字以内で入力してください',
+			'street.numeric' => '電話番号は半角数字で入力してください',
+			'tel.required' => '電話番号が入力されていません',
+			'tel.regex' => '電話番号の形式で入力してください',
 		];
 	}
 }
