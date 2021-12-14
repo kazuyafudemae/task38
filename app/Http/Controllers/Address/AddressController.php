@@ -3,11 +3,11 @@ namespace App\Http\Controllers\Address;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Address;
 
 class AddressController extends Controller
 {
-
     public function __construct(
 		Address $address
     ) {
