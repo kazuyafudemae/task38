@@ -50,6 +50,7 @@
 @elseif (isset($false_message))
 <p>{{ $false_message }} </p>
 @endif
+<button><a href="{{ route('address.add') }}">お届け先追加</a></button><br>
 </body>
 @endsection
 

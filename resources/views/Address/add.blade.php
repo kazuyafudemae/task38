@@ -36,6 +36,9 @@
 <input type="text" name="street" value="{{ old('street') }}">
 <p>電話番号</p>
 <input type="text" name="tel" value="{{ old('tel') }}"><br>
+@if (!isset($pre_url))
+<input type="hidden" name="pre_url" value="{{ $pre_url }}"><br>
+@endif
 <input type="submit" value="追加">
 </form>
 </body>

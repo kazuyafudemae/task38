@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\AddressEditRequest;
+use Illuminate\Support\Facades\DB;
 use App\Address;
 use App\User;
-use Illuminate\Support\Facades\DB;
 
 class AddressController extends Controller
 {
@@ -23,14 +24,18 @@ class AddressController extends Controller
     //住所一覧画面
     public function index()
     {
-        $addresses = optional(Address::where('user_id', Auth::id()))->get();
-        $address_id = optional(Auth::user())->address_id;
-        return view('Address.index', compact('addresses', 'address_id'));
+        $addresses = Address::where('user_id', Auth::id())->get();
+		$auth = Auth::id();
+        return view('Address.index', compact('addresses', 'auth'));
     }
 
-	public function showAddForm()
+	public function showAddForm(Request $request)
 	{
 		$prefs = config('pref');
+		if ($request->input('url') !== null) {
+			$pre_url = $request->input('url');
+			return view('Address.add', compact('prefs', 'pre_url'));
+		}
 		return view('Address.add', compact('prefs'));
 	}
 
@@ -51,14 +56,19 @@ class AddressController extends Controller
 			if ($user->address_id === null) {
 				$user->address_id = $this->address->id;
 				$user->save();
-				DB::commit();
 			}
+			DB::commit();
 		} catch (Exception $exception) {
 			DB::rollBack;
 			throw $exception;
 		}
 		set_message('住所が追加されました。');
-		return $this->index();
+		dd($request->input('pre_url'));
+		if ($request->input('pre_url' !== null) {
+			return redirect()->route('cart.index');
+		} else {
+			return $this->index();
+		}
 	}
 
 	public function showEditForm(Request $request)
@@ -72,7 +82,7 @@ class AddressController extends Controller
 		return view('Address.edit', compact('address', 'prefs'));
 	}
 
-	public function edit(AddressRequest $request) {
+	public function edit(AddressEditRequest $request) {
 		$address = $this->address->find($request->id);
 		if (!$address) {
 			set_message('住所が存在しません', false);
@@ -96,7 +106,7 @@ class AddressController extends Controller
 	{
 		$address_id = $request->address_id;
 		$address = $this->address->find($address_id);
-		$user = $this->user->find(Auth::id);
+		$user = $this->user->find(Auth::id());
 		if (!$address) {
 			set_message('住所が見つかりませんでした', false);
 		} elseif ($address->user_id !== Auth::id()) {
@@ -115,5 +125,23 @@ class AddressController extends Controller
 				throw $exception;
 			}
 		}
+		return $this->index();
+	}
+
+	public function save(Request $request)
+	{
+		$id = $request->address_id;
+		$address = Address::find($id);
+		if (!$address) {
+			set_message('お届け先が存在しません。', false);
+		} elseif ($address->user_id != Auth::id()) {
+			set_message('この住所は登録出来ません。', false);
+		} else {
+			$user = Auth::user();
+			$user->address_id = $id;
+			$user->save();
+			set_message('お届け先住所が変更されました。');
+		}
+		return $this->index();
 	}
 }

@@ -46,5 +46,9 @@
 <p>お届け先は登録されていません</p>
 @endif
 <br>
-<button><a href="{{ route('address.add') }}">お届け先追加</a></button><br>
+<form method="post" action="{{ route('address.save') }}">
+{{ csrf_field() }}
+{{ Form::hidden('url', URL::previous()) }}
+<button type="submit">お届け先追加</button>
+</form>
 @endsection
