@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class AddressEditRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return false;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+			'name' => ['required', 'max:50'],
+			'first_code' => ['required', 'regex:/[0-9]{3}/'],
+			'last_code' => ['required', 'regex:/[0-9]{4}/'],
+			'state' => ['required', 'max:4'],
+			'city' => ['required', 'max:50'],
+			'tel' => ['required', 'regex:/^0[0-9]{9,10}$/']
+        ];
+    }
+
+
+	public function messages()
+	{
+		return [
+			'name.required' => '氏名が入力されていません',
+			'name.max' => '氏名は50文字以内で入力してください',
+			'first_code.required' => '郵便番号が入力されていません',
+			'first_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
+			'last_code.required' => '郵便番号が入力されていません',
+			'last_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
+			'state.required' => '住所の都道府県がが入力されていません',
+			'state.max' => '都道府県は4文字以内で入力してください',
+			'city.required' => '住所の市区町村が入力されていません',
+			'city.max' => '市町村名は50文字以内で入力してください',
+			'street.required' => '住所の町名番地が入力されていません',
+			'street.max' => '町名番地は100文字以内で入力してください',
+			'street.numeric' => '電話番号は半角数字で入力してください',
+			'tel.required' => '電話番号が入力されていません',
+			'tel.regex' => '電話番号の形式で入力してください',
+		];
+	}
+}

@@ -16,6 +16,7 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 @section('menubar')
 <ul>
 <li>@yield('list')</li>
+<li><p class='menutitle'><a href='{{route('address.index')}}'>Address Top</a></p></li>
 <li><p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p></li>
 <li><p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p></li>
 </ul>

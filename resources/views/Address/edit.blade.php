@@ -1,4 +1,4 @@
-@extends(layouts.address')
+@extends('layouts.address')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -10,7 +10,7 @@
 </div>
 @endif
 <body>
-<form method="post" action="{{ route('address.edit', $address->id) }}">
+<form method="post" action="{{ route('address.edit', ['id' => $address->id])}}">
 {{ csrf_field() }}
 <p>名前</p>
 <input type="text" name="name" value="{{ old('name', $address->name) }}">

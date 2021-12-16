@@ -2,10 +2,7 @@
 
 @section('menubar')
 @parent
-:住所一覧ページ
-@endsection
-
-@section('list', '<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>')
+住所一覧ページ
 @endsection
 
 @section('content')

@@ -26,7 +26,7 @@ class CreateAddressesTable extends Migration
 			$table->string('state');
 			$table->string('city');
 			$table->string('street');
-			$table->integer('tel');
+			$table->string('tel');
 			$table->softDeletes();
             $table->timestamps();
         });
