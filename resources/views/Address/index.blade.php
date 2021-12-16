@@ -31,7 +31,7 @@
 <td>{{ $address->first_code }}-{{ $address->last_code }}</td>
 <td>{{ $address->state . $address->city . $address->street }}</td>
 <td>{{ $address->tel }}</td>
-<td><button><a href="{{ route('address.edit', $address->id) }}">編集</a></button></td>
+<td><button><a href="{{ route('address.edit', ['id' => $address->id]) }}">編集</a></button></td>
 <td>
 <form method="post" action="{{ route('address.delete') }}">
 {{ csrf_field() }}

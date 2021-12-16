@@ -47,6 +47,7 @@ class AddressController extends Controller
 
 	public function showEditForm($id)
 	{
+		dd($id);
 		$addresses = $this->address->find($id);
 		if (!$address || $address->user_id !== Auth::id()) {
 			set_message('不正なアクセスです', false);
