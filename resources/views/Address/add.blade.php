@@ -1,4 +1,13 @@
 @extends('layouts.address')
+
+@section('menubar')
+@parent
+:住所一覧ページ
+@endsection
+
+@section('list', '<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>')
+@endsection
+
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -10,7 +19,7 @@
 </div>
 @endif
 <body>
-<form method="post" action="{{ route('address.store') }}">
+<form method="post" action="{{ route('address.add') }}">
 {{ csrf_field() }}
 <p>名前</p>
 <input type="text" name="name" value="{{ old('name') }}">

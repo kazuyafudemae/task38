@@ -10,7 +10,7 @@
 </div>
 @endif
 <body>
-<form method="post" action="{{ route('address.update', $address->id) }}">
+<form method="post" action="{{ route('address.edit', $address->id) }}">
 {{ csrf_field() }}
 <p>名前</p>
 <input type="text" name="name" value="{{ old('name', $address->name) }}">

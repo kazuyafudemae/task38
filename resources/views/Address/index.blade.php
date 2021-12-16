@@ -33,7 +33,7 @@
 <td>{{ $address->tel }}</td>
 <td><button><a href="{{ route('address.edit', $address->id) }}">編集</a></button></td>
 <td>
-<form method="post" action="{{ route('address.destroy') }}">
+<form method="post" action="{{ route('address.delete') }}">
 {{ csrf_field() }}
 <input type="hidden" name="address_id" value="{{ $address->id }}">
 <button type="submit" class="btn btn-danger btn-sm btn-dell">削除</button>
@@ -46,5 +46,5 @@
 <p>お届け先は登録されていません</p>
 @endif
 <br>
-<button><a href="{{ route('address.create') }}">お届け先追加</a></button><br>
+<button><a href="{{ route('address.add') }}">お届け先追加</a></button><br>
 @endsection

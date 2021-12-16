@@ -4,35 +4,35 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddressRequest extends FormRequest
+class sub_AddressRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
 		return true;
-    }
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return [
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
 			'name' => ['required', 'max:50'],
-			'first_code' => ['required', 'regex:/[0-9]{3}/'],
-			'last_code' => ['required', 'regex:/[0-9]{4}/'],
+			'first_code' => ['required', 'regex:/[0-9]{3}/']
+			'last_code' => ['required', 'regex:/[0-9]{4}/']
 			'state' => ['required', 'max:4'],
 			'city' => ['required', 'max:50'],
 			'street' => ['required', 'unique:addresses,street', 'max:100'],
-			'tel' => ['required', 'regex:/^0[0-9]{9,10}$/']
+			'tel' => ['required', 'regex:/^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$/']
 		];
-    }
+	}
 
 	public function messages()
 	{

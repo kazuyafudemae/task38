@@ -15,9 +15,9 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <h1>@yield('title')</h1>
 @section('menubar')
 <ul>
-<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>
-<p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p>
-<li>@show</li>
+<li>@yield('list')</li>
+<li><p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p></li>
 </ul>
 <hr size='1'>
 <div class='content'>
@@ -26,7 +26,7 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <li>{{ $error }}</li>
 @endforeach
 @if (session('message'))
-    @if (session('is_success')
+    @if (session('is_success'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @else
         <div class="alert alert-danger">{{ session('message') }}</div>

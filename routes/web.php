@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'address'], function() {
 	Route::get('index', 'Address\AddressController@index')->name('address.index');
+	Route::post('index', 'Address\AddressController@save')->name('address.save');
 	Route::get('add', 'Address\AddressController@showAddForm')->name('address.add');
 	Route::get('edit', 'Address\AddressController@showEditForm')->name('address.edit');
 	Route::post('add', 'Address\AddressController@add')->name('address.add');
