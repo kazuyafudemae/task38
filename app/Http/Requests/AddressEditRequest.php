@@ -26,8 +26,8 @@ class AddressEditRequest extends FormRequest
     {
         return [
 			'name' => ['required', 'max:50'],
-			'first_code' => ['required', 'regex:/[0-9]{3}/', 'numeric'],
-			'last_code' => ['required', 'regex:/[0-9]{4}/', 'numeric'],
+			'first_code' => ['required', 'regex:/^[0-9]{3}$/'],
+			'last_code' => ['required', 'regex:/^[0-9]{4}$/'],
 			'state' => ['required', 'max:4'],
 			'city' => ['required', 'max:50'],
 			'street' => ['required', Rule::unique('addresses')->ignore($this->id), 'max:100'],
@@ -43,10 +43,8 @@ class AddressEditRequest extends FormRequest
 			'name.max' => '氏名は50文字以内で入力してください',
 			'first_code.required' => '郵便番号が入力されていません',
 			'first_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
-			'first_code.numeric' => '郵便番号を入力欄に合わせて英数字で入力してください',
 			'last_code.required' => '郵便番号が入力されていません',
 			'last_code.regex' => '郵便番号を入力欄に合わせて英数字で入力してください',
-			'last_code.numeric' => '郵便番号を入力欄に合わせて英数字で入力してください',
 			'state.required' => '住所の都道府県がが入力されていません',
 			'state.max' => '都道府県は4文字以内で入力してください',
 			'city.required' => '住所の市区町村が入力されていません',

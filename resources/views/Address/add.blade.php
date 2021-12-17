@@ -1,20 +1,12 @@
 @extends('layouts.address')
 
+@section('title', 'Address')
+
 @section('menubar')
 @parent
-住所一覧ページ
 @endsection
 
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-<ul>
-@foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
-</ul>
-</div>
-@endif
 <body>
 <form method="post" action="{{ route('address.add') }}">
 {{ csrf_field() }}

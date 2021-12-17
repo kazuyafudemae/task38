@@ -33,7 +33,7 @@ class AddressController extends Controller
 	{
 		$prefs = config('pref');
 		$pre_url = url()->previous();
-		if ($pre_url === "https://procir-study.site/Fudemae225/task36/blog/public/cart/index") {
+		if ($pre_url === "https://procir-study.site/Fudemae225/task36/blog/public/address/choice") {
 			session(['pre_url' => $pre_url]);
 			dump(session('pre_url'));
 			return view('Address.add', compact('prefs'));
@@ -67,7 +67,7 @@ class AddressController extends Controller
 		set_message('住所が追加されました。');
 		if (session('pre_url')) {
 			session()->forget('pre_url');
-			return redirect()->route('cart.index');
+			return $this->showChoiceForm();
 		} else {
 			return $this->index();
 		}
@@ -130,7 +130,14 @@ class AddressController extends Controller
 		return $this->index();
 	}
 
-	public function save(Request $request)
+    public function showChoiceForm()
+    {
+        $addresses = Address::where('user_id', Auth::id())->get();
+		$auth = Auth::id();
+        return view('Address.choice', compact('addresses', 'auth'));
+    }
+
+	public function choice(Request $request)
 	{
 		$id = $request->address_id;
 		$address = Address::find($id);
@@ -144,6 +151,6 @@ class AddressController extends Controller
 			$user->save();
 			set_message('お届け先住所が変更されました。');
 		}
-		return $this->index();
+		return $this->showChoiceForm();
 	}
 }

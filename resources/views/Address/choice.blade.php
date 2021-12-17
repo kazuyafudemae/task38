@@ -1,10 +1,17 @@
 @extends('layouts.address')
+
+@section('title', 'Address')
+
+@section('menubar')
+@parent
+@endsection
+
 @section('content')
-<h2>お届け先一覧</h2>
+<h2>お届け先変更</h2>
 @if (0 < $addresses->count())
 <table border="1">
 <tr style="background-color:yellow">
-<th>◉</th>
+<th></th>
 <th>お届け先</th>
 <th>名前</th>
 <th>郵便番号</th>
@@ -15,16 +22,11 @@
 </tr>
 @foreach ($addresses as $address)
 <tr>
-<td>
-@if ($address->user_id === $auth)
-<input type="radio" checked>
-@endif
-</td>
 <td align="center">
-<form method="post" action="{{ route('address.save') }}">
+<form method="post" action="{{ route('address.choice') }}">
 {{ csrf_field() }}
-<input type="hidden" name="address_id" value="{{ $address->id }}">
-<button type="submit">選択</button>
+<input type="radio" name="address_id" value="{{ $address->id }}">
+<button type="submit">変更</button>
 </form>
 </td>
 <td>{{ $address->name }}</td>

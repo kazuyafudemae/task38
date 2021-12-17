@@ -16,7 +16,6 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 @section('menubar')
 <ul>
 <p class='menutitle'><a href='{{route('admin.item.index')}}'>Toppage</a></p>
-<li>@show</li>
 </ul>
 <hr size='1'>
 <div class='content'>

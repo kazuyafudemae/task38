@@ -1,4 +1,11 @@
 @extends('layouts.address')
+
+@section('title', 'Address')
+
+@section('menubar')
+@parent
+@endsection
+
 @section('content')
 <h2>お届け先一覧</h2>
 @if (0 < $addresses->count())
@@ -33,5 +40,7 @@
 <p>お届け先は登録されていません</p>
 @endif
 <br>
-<button><a href="{{ route('address.choice') }}">お届け先選択</a></button><br>
+<button><a href="{{ route('address.add') }}">お届け先追加</a></button>
+<button><a href="{{ route('address.choice') }}">お届け先選択</a></button>
+<br>
 @endsection

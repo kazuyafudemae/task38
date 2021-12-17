@@ -2,12 +2,8 @@
 
 @section('title', 'Items')
 
-@section('menubar')
-@parent
-Item詳細ページ
-@endsection
-
 @section('content')
+<h2>Item詳細ページ</h2>
 <table>
 <tr><th>商品名</th><th>商品説明</th><th>値段</th><th>在庫の有無</th><th></th></tr>
 @foreach ($items as $item)
