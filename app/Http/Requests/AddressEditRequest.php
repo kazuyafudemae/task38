@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class AddressRequest extends FormRequest
+class AddressEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class AddressRequest extends FormRequest
      */
     public function authorize()
     {
-		return true;
+        return true;
     }
 
     /**
@@ -21,7 +22,6 @@ class AddressRequest extends FormRequest
      *
      * @return array
      */
-
     public function rules()
     {
         return [
@@ -30,10 +30,11 @@ class AddressRequest extends FormRequest
 			'last_code' => ['required', 'regex:/^[0-9]{4}$/'],
 			'state' => ['required', 'max:4'],
 			'city' => ['required', 'max:50'],
-			'street' => ['required', 'unique:addresses,street', 'max:100'],
+			'street' => ['required', Rule::unique('addresses')->ignore($this->id), 'max:100'],
 			'tel' => ['required', 'regex:/^0[0-9]{9,10}$/']
-		];
+        ];
     }
+
 
 	public function messages()
 	{
@@ -49,8 +50,8 @@ class AddressRequest extends FormRequest
 			'city.required' => '住所の市区町村が入力されていません',
 			'city.max' => '市町村名は50文字以内で入力してください',
 			'street.required' => '住所の町名番地が入力されていません',
-			'street.unique' => 'その住所はすでに登録されています',
 			'street.max' => '町名番地は100文字以内で入力してください',
+			'street.unique' => 'その住所はすでに登録されています',
 			'tel.required' => '電話番号が入力されていません',
 			'tel.regex' => '電話番号の形式で入力してください',
 		];

@@ -4,36 +4,35 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddressRequest extends FormRequest
+class sub_AddressRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
 		return true;
-    }
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-
-    public function rules()
-    {
-        return [
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return [
 			'name' => ['required', 'max:50'],
-			'first_code' => ['required', 'regex:/^[0-9]{3}$/'],
-			'last_code' => ['required', 'regex:/^[0-9]{4}$/'],
+			'first_code' => ['required', 'regex:/[0-9]{3}/']
+			'last_code' => ['required', 'regex:/[0-9]{4}/']
 			'state' => ['required', 'max:4'],
 			'city' => ['required', 'max:50'],
 			'street' => ['required', 'unique:addresses,street', 'max:100'],
-			'tel' => ['required', 'regex:/^0[0-9]{9,10}$/']
+			'tel' => ['required', 'regex:/^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$/']
 		];
-    }
+	}
 
 	public function messages()
 	{
@@ -51,6 +50,7 @@ class AddressRequest extends FormRequest
 			'street.required' => '住所の町名番地が入力されていません',
 			'street.unique' => 'その住所はすでに登録されています',
 			'street.max' => '町名番地は100文字以内で入力してください',
+			'street.numeric' => '電話番号は半角数字で入力してください',
 			'tel.required' => '電話番号が入力されていません',
 			'tel.regex' => '電話番号の形式で入力してください',
 		];

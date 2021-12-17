@@ -15,13 +15,27 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <h1>@yield('title')</h1>
 @section('menubar')
 <ul>
-<p class='menutitle'><a href='{{route('home')}}'>User Home</a></p>
-<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>
-<p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p>
-<li>@show</li>
+<li><p class='menutitle'><a href='{{route('home')}}'>User Home</a></p></li>
+<li><p class='menutitle'><a href='{{route('address.index')}}'>Address Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('cart.index')}}'>Cart Top</a></p></li>
 </ul>
 <hr size='1'>
 <div class='content'>
+@foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+@if (session('message'))
+    @if (session('is_success'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @else
+        <div class="alert alert-danger">{{ session('message') }}</div>
+    @endif
+    <?php
+    session()->flash('message', null);
+    session()->flash('is_succes', null);
+    ?>
+@endif
 @yield('content')
 </div>
 <div clas='footer'>

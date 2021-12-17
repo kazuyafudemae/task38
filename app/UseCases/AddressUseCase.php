@@ -1,5 +1,4 @@
 <?php
-
 namespace App\UseCases;
 
 use App\Address;
@@ -116,6 +115,5 @@ class AddressUsecase
 			set_message('お届け先住所が変更されました。');
 		}
 	}
-
 }
 

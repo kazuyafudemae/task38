@@ -4,7 +4,7 @@
 <style>
 body { font-size:16pt; color:#999, margin:5px; }
 h1 { font-size:50pt; text-align:right; color:#f6f6f6; margin:-20px 0px -30px 0px; letter-spacing:-4pt; }
-ul { font-size::12pt; }
+ul { font-size:10pt; }
 hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 .menutitle { font-size:14pt; font-weight:bold; margin:0px; }
 .content { margin:10px; }
@@ -14,12 +14,28 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <body>
 <h1>@yield('title')</h1>
 @section('menubar')
+<div>
 <ul>
-<p class='menutitle'><a href='{{route('item.index')}}'>Toppage</a></p>
-<li>@show</li>
+<li><p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('address.index')}}'>Address Top</a></p></li>
 </ul>
+</div>
 <hr size='1'>
 <div class='content'>
+@foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+@if (session('message'))
+    @if (session('is_success'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @else
+        <div class="alert alert-danger">{{ session('message') }}</div>
+    @endif
+    <?php
+    session()->flash('message', null);
+    session()->flash('is_succes', null);
+    ?>
+@endif
 @yield('content')
 </div>
 <div clas='footer'>

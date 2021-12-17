@@ -9,139 +9,21 @@ use App\Repositories\AddressRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Address;
 use App\User;
 
 class Address extends Model
 {
-    use Notifiable;
 	use SoftDeletes;
 	protected $dates = ['deleted_at'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-		'postal_code',
-		'pre_name',
-		'city_name',
-		'block_name',
-		'tel_number',
-    ];
-
-
-
-	public function __construct(
-		Address $address,
-		User $user
-	) {
-		$this->address = $address;
-		$this->user = $user;
-	}
-
-	public function getAll()
-	{
-		return $this->address->where('user_id', Auth::id())->get();
-	}
-
-	public function getByID($id)
-	{
-		return $this->address->find($id);
-	}
-
-	public function store($request)
-	{
-		$this->address->user_id = Auth::id();
-		$this->address->name = $request->name;
-		$this->address->first_code = $request->first_code;
-		$this->address->last_code = $request->last_code;
-		$this->address->state = $request->state;
-		$this->address->city = $request->city;
-		$this->address->street = $request->street;
-		$this->address->tel = $request->tel;
-		DB::beginTransaction();
-		try {
-			$address_id = $this->address->save();
-			$user = Auth::user();
-			if ($user->address_id == null) {
-				$user->address_id = $address_id;
-				$user->save();
-			}
-			DB::commit();
-		} catch (Exception $exception) {
-			DB::rollBack();
-			throw $exception;
-		}
-		set_message('住所が追加されました。');
-	}
-
-	public function edit($request, $id)
-	{
-		$address = $this->address->find($id);
-		if (!$address) {
-			set_message('住所が存在しません。', false);
-		} elseif ($address->user_id != Auth::id()) {
-			set_message('この住所は編集出来ません。', false);
-		} else {
-			$address->name = $request->name;
-			$address->first_code = $request->first_code;
-			$address->last_code = $request->last_code;
-			$address->state = $request->state;
-			$address->city = $request->city;
-			$address->street = $request->street;
-			$address->tel = $request->tel;
-			$address->save();
-			set_message('住所情報が変更されました。');
-		}
-	}
-
-	public function delete($request)
-	{
-		$address_id = $request->input('address_id');
-		$address = $this->address->find($address_id);
-		$user = $this->user->find(Auth::id());
-		if (!$address) {
-			set_message('該当する項目が見つかりませんでした。', false);
-		} elseif ($address->user_id != Auth::id()) {
-			set_message('この住所は削除出来ません。', false);
-		} else {
-			DB::beginTransaction();
-			try {
-				$this->address->delete($address);
-				if ($user->address_id === $address_id) {
-					$user->address_id = null;
-					$this->userRepository->save($user);
-				}
-				DB::commit();
-			} catch (Exception $exception) {
-				DB::rollBack();
-				throw $exception;
-			}
-			set_message('住所が削除されました。');
-		}
-	}
-
-	public function save($request)
-	{
-		$id = $request->input('address_id');
-		$address = $this->address->find($id);
-		if (!$address) {
-			set_message('お届け先が存在しません。', false);
-		} elseif ($address->user_id != Auth::id()) {
-			set_message('この住所は登録出来ません。', false);
-		} else {
-			$user = $this->user->find($address->user_id);
-			$user->address_id = $id;
-			$this->user->save($user);
-			set_message('お届け先住所が変更されました。');
-		}
-	}
+	protected $fillable = [
+		'user_id',
+		'name',
+		'first_code',
+		'last_code',
+		'state',
+		'city',
+		'street',
+		'tel',
+	];
 }
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */

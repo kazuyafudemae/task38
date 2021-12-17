@@ -1,16 +1,14 @@
-@extends(layouts.address')
+@extends('layouts.address')
+
+@section('title', 'Address')
+
+@section('menubar')
+@parent
+@endsection
+
 @section('content')
-@if ($errors->any())
-<div class="alert alert-danger">
-<ul>
-@foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
-</ul>
-</div>
-@endif
 <body>
-<form method="post" action="{{ route('address.update', $address->id) }}">
+<form method="post" action="{{ route('address.edit', ['id' => $address->id])}}">
 {{ csrf_field() }}
 <p>名前</p>
 <input type="text" name="name" value="{{ old('name', $address->name) }}">

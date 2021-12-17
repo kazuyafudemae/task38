@@ -7,7 +7,7 @@ h1 { font-size:50pt; text-align:right; color:#f6f6f6; margin:-20px 0px -30px 0px
 ul { font-size::12pt; }
 hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 .menutitle { font-size:14pt; font-weight:bold; margin:0px; }
-.content { margin:10px; }
+.content { margin:12px; }
 .footer { text-align:right; font-size:10pt; margin:10px; border-bottom:solid 1px #ccc; color:#ccc; }
 </style>
 </head>
@@ -15,18 +15,17 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <h1>@yield('title')</h1>
 @section('menubar')
 <ul>
-<p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p>
-<p class='menutitle'><a href='{{route('cart.index')}}'>カート内一覧画面へ</a></p>
-<li>@show</li>
+<li><p class='menutitle'><a href='{{route('address.index')}}'>Address Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('item.index')}}'>Item Top</a></p></li>
+<li><p class='menutitle'><a href='{{route('cart.index')}}'>Cart Top</a></p></li>
 </ul>
 <hr size='1'>
 <div class='content'>
-@yield('content')
 @foreach ($errors->all() as $error)
 <li>{{ $error }}</li>
 @endforeach
 @if (session('message'))
-    @if (session('is_success')
+    @if (session('is_success'))
         <div class="alert alert-success">{{ session('message') }}</div>
     @else
         <div class="alert alert-danger">{{ session('message') }}</div>
@@ -36,6 +35,7 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
     session()->flash('is_succes', null);
     ?>
 @endif
+@yield('content')
 </div>
 <div clas='footer'>
 @yield('footer')

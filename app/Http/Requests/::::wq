@@ -21,13 +21,12 @@ class AddressRequest extends FormRequest
      *
      * @return array
      */
-
     public function rules()
     {
         return [
 			'name' => ['required', 'max:50'],
-			'first_code' => ['required', 'regex:/^[0-9]{3}$/'],
-			'last_code' => ['required', 'regex:/^[0-9]{4}$/'],
+			'first_code' => ['required', 'regex:/[0-9]{3}/'],
+			'last_code' => ['required', 'regex:/[0-9]{4}/'],
 			'state' => ['required', 'max:4'],
 			'city' => ['required', 'max:50'],
 			'street' => ['required', 'unique:addresses,street', 'max:100'],

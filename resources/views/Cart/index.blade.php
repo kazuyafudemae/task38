@@ -1,13 +1,13 @@
 @extends('layouts.cart')
 
-@section('title', 'Items')
+@section('title', 'Cart')
 
 @section('menubar')
 @parent
-カート内一覧ページ
 @endsection
 
 @section('content')
+<h2>カート内一覧ページ</h2>
 <body>
 @if ($carts->count() > 0)
 <table>
@@ -50,6 +50,7 @@
 @elseif (isset($false_message))
 <p>{{ $false_message }} </p>
 @endif
+<button><a href="{{ route('address.choice') }}">お届け先選択</a></button><br>
 </body>
 @endsection
 
