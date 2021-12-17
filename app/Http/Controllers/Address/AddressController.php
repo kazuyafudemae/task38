@@ -32,9 +32,11 @@ class AddressController extends Controller
 	public function showAddForm(Request $request)
 	{
 		$prefs = config('pref');
-		if ($request->input('url') !== null) {
-			$pre_url = $request->input('url');
-			return view('Address.add', compact('prefs', 'pre_url'));
+		$pre_url = url()->previous();
+		if ($pre_url === "https://procir-study.site/Fudemae225/task36/blog/public/cart/index") {
+			session(['pre_url' => $pre_url]);
+			dump(session('pre_url'));
+			return view('Address.add', compact('prefs'));
 		}
 		return view('Address.add', compact('prefs'));
 	}
@@ -63,8 +65,8 @@ class AddressController extends Controller
 			throw $exception;
 		}
 		set_message('住所が追加されました。');
-		dd($request->input('pre_url'));
-		if ($request->input('pre_url' !== null) {
+		if (session('pre_url')) {
+			session()->forget('pre_url');
 			return redirect()->route('cart.index');
 		} else {
 			return $this->index();

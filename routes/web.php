@@ -28,6 +28,8 @@ Route::group(['prefix' => 'address'], function() {
 	Route::post('add', 'Address\AddressController@add')->name('address.add');
 	Route::post('edit', 'Address\AddressController@edit')->name('address.edit');
 	Route::post('delete', 'Address\AddressController@delete')->name('address.delete');
+	Route::get('choice', 'Address\AddressController@showChoiceForm')->name('address.choice');
+	Route::post('choice', 'Address\AddressController@choice')->name('address.choice');
 });
 
 Route::group(['prefix' => 'cart'], function() {

@@ -21,6 +21,20 @@ hr { margin: 25px 100px; border-top: 1px dashed #ddd; }
 <hr size='1'>
 <div class='content'>
 @yield('content')
+@foreach ($errors->all() as $error)
+<li>{{ $error }}</li>
+@endforeach
+@if (session('message'))
+    @if (session('is_success'))
+        <div class="alert alert-success">{{ session('message') }}</div>
+    @else
+        <div class="alert alert-danger">{{ session('message') }}</div>
+    @endif
+    <?php
+    session()->flash('message', null);
+    session()->flash('is_succes', null);
+    ?>
+@endif
 </div>
 <div clas='footer'>
 @yield('footer')
