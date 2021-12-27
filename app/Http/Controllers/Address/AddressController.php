@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Address;
 
 use Illuminate\Http\Request;
@@ -35,7 +34,6 @@ class AddressController extends Controller
 		$pre_url = url()->previous();
 		if ($pre_url === "https://procir-study.site/Fudemae225/task36/blog/public/address/choice") {
 			session(['pre_url' => $pre_url]);
-			dump(session('pre_url'));
 			return view('Address.add', compact('prefs'));
 		}
 		return view('Address.add', compact('prefs'));
