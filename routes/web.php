@@ -45,6 +45,13 @@ Route::group(['prefix' => 'item'], function(){
 });
 
 
+Route::group(['prefix' => 'account'], function(){
+	Route::get('edit', 'User\AccountController@showEditForm')->name('user.edit');
+	Route::post('edit', 'User\AccountController@edit')->name('user.edit');
+	Route::get('check_mail', 'User\AccountController@check_mail_users')->name('user.check_mail');
+});
+
+
 Route::group(['prefix' => 'admin'], function(){
 	Route::get('home', 'Admin\HomeController@index')->name('admin.home');
 	Route::get('login', 'Admin\Auth\LoginController@showLoginForm')->name('admin.login');

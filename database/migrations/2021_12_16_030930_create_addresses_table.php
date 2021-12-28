@@ -11,8 +11,8 @@ class CreateAddressesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+	public function up()
+	{
 		if (Schema::hasTable('addresses')) {
 			// テーブルが存在していればリターン
 			return;
