@@ -28,13 +28,13 @@
 </style>
 <body>
 <h1>
-  パスワードリセット
+メールアドレス認証
 </h1>
 <p>
-  以下のボタンを押下し、パスワードリセットの手続きを行ってください。
+  以下のボタンを押下し、有効なメールアドレスである確認を行ってください。
 </p>
 <p id="button">
-  <a href="{{$reset_url}}">パスワードリセット</a>
+  <a href="https://procir-study.site/Fudemae225/task38/blog/public/account/check_mail?token={{ $token }}">このメールアドレスを有効化する</a>
 </p>
 </body>
 </html>
