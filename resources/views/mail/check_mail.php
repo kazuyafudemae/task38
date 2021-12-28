@@ -34,7 +34,7 @@
   以下のボタンを押下し、有効なメールアドレスである確認を行ってください。
 </p>
 <p id="button">
-  <a href="https://procir-study.site/Fudemae225/task38/blog/public/account/check_mail?token={{ $token }}">このメールアドレスを有効化する</a>
+  <a href="https://procir-study.site/Fudemae225/task38/blog/public/account/check_mail?token={{ $mail_check_user->token }}">このメールアドレスを有効化する</a>
 </p>
 </body>
 </html>

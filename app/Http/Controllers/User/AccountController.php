@@ -5,20 +5,19 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AddressRequest;
+use App\Http\Requests\AccountEditUserRequest;
 use App\Http\Requests\AddressEditRequest;
 use Illuminate\Support\Facades\DB;
-use App\Address;
 use App\User;
 
 class AccountController extends Controller
 {
     public function __construct(
-		Address $address,
 		User $user
+		mailCheckUser $mail_check_user
     ) {
-		$this->address = $address;
 		$this->user = $user;
+		$this->mail_check_user = $mail_check_user;
 		$this->middleware('auth:user');
     }
 
@@ -62,6 +61,22 @@ class AccountController extends Controller
 		}
 	}
 
-	public function send_check_mail() {
+	public function send_check_mail()
+	{
+		$user = Auth::user();
+		$token = $this->mail_check_users->token;
+		Mail::to($this->mail_check_user->email)->send(new checkMail($token, $user));
+	}
+
+	public function store($request)
+	{
+		$token = uniqid(mt_rand(), true);
+		$this->mail_check_user->name = $request->name;
+		$this->mail_check_user->email = $request->email;
+		$this->mail_check_user->password = $request->new_password;
+		$this->mail_check_user->token = $token;
+		$this->mail_check_user->save();
+	}
+
 
 }
