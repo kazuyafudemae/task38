@@ -46,9 +46,9 @@ Route::group(['prefix' => 'item'], function(){
 
 
 Route::group(['prefix' => 'account'], function(){
-	Route::get('edit', 'User\AccountController@showEditForm')->name('user.edit');
-	Route::post('edit', 'User\AccountController@edit')->name('user.edit');
-	Route::get('check_mail', 'User\AccountController@check_mail_users')->name('user.check_mail');
+	Route::get('edit', 'User\AccountController@showEditForm')->name('account.edit');
+	Route::post('edit', 'User\AccountController@edit')->name('account.edit');
+	Route::get('check_mail', 'User\AccountController@check_mail_users')->name('account.check_mail');
 });
 
 

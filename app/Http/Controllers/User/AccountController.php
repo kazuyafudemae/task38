@@ -9,6 +9,7 @@ use App\Http\Requests\AccountEditUserRequest;
 use App\Http\Requests\AddressEditRequest;
 use Illuminate\Support\Facades\DB;
 use App\User;
+use App\mailCheckUser;
 
 class AccountController extends Controller
 {
@@ -31,12 +32,15 @@ class AccountController extends Controller
 
 	public function edit(AccountEditUserRequest $request) {
 		$user = Auth::user();
-		$newPwd = $request->new_password;
+		$password = $request->password;
 
 		if (Hash::check($newPwd, $user->password)) {
 			// 一致したときの処理
 			if ($user->email !== $request->email) {
-
+				$this->store($request);
+				$this->send_check_mail();
+				set_message('確認メールを送信しました', true);
+				return view('home');
 			} else {
 
 			}
@@ -78,5 +82,28 @@ class AccountController extends Controller
 		$this->mail_check_user->save();
 	}
 
+	public function store_user($request)
+	{
+		$user = $this->user->find(Auth::id());
+		$this->user->name = $request->name;
+		$this->user->email = $request->email;
+		$this->user->password = $request->new_password;
+		$this->user->save();
+	}
 
+	public function check_mail_user($token)
+	{
+		$user = $this->mail_check_user->find($token);
+		$pre_user = $this->user->find(Auth::id());
+		if ($user) {
+			$pre_user->name = $user->name;
+			$pre_user->email = $user->email;
+			$pre_user->password = $user->password;
+			$pre_user->save();
+			$user->delete();
+		} else {
+			$user->delete();
+			return view('home');
+		}
+	}
 }
